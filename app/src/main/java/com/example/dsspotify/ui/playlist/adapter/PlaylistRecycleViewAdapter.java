@@ -1,4 +1,4 @@
-package com.example.dsspotify.adapter;
+package com.example.dsspotify.ui.playlist.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;

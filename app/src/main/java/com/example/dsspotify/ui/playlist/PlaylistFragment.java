@@ -1,4 +1,4 @@
-package com.example.dsspotify.ui.dashboard;
+package com.example.dsspotify.ui.playlist;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,16 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dsspotify.R;
 
-public class DashboardFragment extends Fragment {
+public class PlaylistFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private PlaylistViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+                new ViewModelProvider(this).get(PlaylistViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView =  root.findViewById(R.id.textView);
+        final TextView textView =  root.findViewById(R.id.txtview_auteur);
         final RecyclerView rcyclview_song_playlist = root.findViewById(R.id.rcyclview_song_playlist);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
