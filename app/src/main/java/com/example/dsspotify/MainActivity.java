@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,12 +31,22 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity{
 
+    public static MediaPlayer mediaPlayer = null;
+    public static TextView txtview_titre = null;
+    public static TextView txtview_artist = null;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         getSupportActionBar().hide();
+
+         txtview_titre = findViewById(R.id.txtview_titre);
+         txtview_artist = findViewById(R.id.txtview_artist);
+
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -50,7 +63,7 @@ public class MainActivity extends AppCompatActivity{
         SeekBar seekBar_mediaplayer = findViewById(R.id.seekBar_mediaplayer);
 
         //
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.lensko_titsepoken_2015);
+        mediaPlayer = MediaPlayer.create(this, R.raw.lensko_titsepoken_2015);
 
         seekBar_mediaplayer.setMax(mediaPlayer.getDuration());
 
@@ -93,7 +106,6 @@ public class MainActivity extends AppCompatActivity{
 
 
         ImageView imgbtn_main_stop = findViewById(R.id.imgbtn_main_stop);
-
         imgbtn_main_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +114,20 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
+
+        ImageView imgbtn_main_reset = findViewById(R.id.imgbtn_main_reset);
+        imgbtn_main_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    mediaPlayer.seekTo(0);
+                mediaPlayer.start();
+
+            }
+        });
+
+
+
 
 
 

@@ -1,6 +1,7 @@
 package com.example.dsspotify.ui.playlist.adapter;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dsspotify.MainActivity;
 import com.example.dsspotify.R;
 import com.example.dsspotify.ui.playlist.objects.Song;
 
@@ -44,6 +46,9 @@ public class PlaylistRecycleViewAdapter extends  RecyclerView.Adapter<PlaylistRe
             @Override
             public void onClick(View v) {
                 //
+                MainActivity.mediaPlayer = MediaPlayer.create(mContext,song.getRessourceId());
+                MainActivity.txtview_titre.setText(song.getTitle());
+                MainActivity.txtview_artist.setText("by "+song.getArtist());
             }
         });
 

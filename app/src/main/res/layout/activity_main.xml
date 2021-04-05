@@ -115,7 +115,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:visibility="visible"
-                    app:srcCompat="@drawable/ic_baseline_stop_24"
+                    app:srcCompat="@drawable/ic_baseline_repeat_24"
                     tools:ignore="VectorDrawableCompat" />
 
             </LinearLayout>

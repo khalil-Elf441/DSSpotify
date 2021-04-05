@@ -40,18 +40,16 @@ public class PlaylistFragment extends Fragment {
 */
         //
         List<Song> SongList = new ArrayList<>();
-        SongList.add(new Song("Titsepoken 2015","Lensko"));
-        SongList.add(new Song("hole2","khalil"));
-        SongList.add(new Song("hole3","khalil"));
-        SongList.add(new Song("hole4","khalil"));
-        SongList.add(new Song("hole5","khalil"));
-        SongList.add(new Song("hole6","khalil"));
-        SongList.add(new Song("hole1","khalil"));
-        SongList.add(new Song("hole2","khalil"));
-        SongList.add(new Song("hole3","khalil"));
-        SongList.add(new Song("hole4","khalil"));
-        SongList.add(new Song("hole5","khalil"));
-        SongList.add(new Song("hole6","khalil"));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
 
 
         //
@@ -62,7 +60,6 @@ public class PlaylistFragment extends Fragment {
         //
         recycleview_song_playlist.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
 
 
 

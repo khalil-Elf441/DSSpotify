@@ -7,10 +7,20 @@ public class Song {
     private String artist;
     private String filename;
     private String image;
+    private int ressourceId;
 
-    public Song(String title, String artist) {
+    public Song(String title, String artist, int ressourceId) {
         this.title = title;
         this.artist = artist;
+        this.ressourceId = ressourceId;
+    }
+
+    public int getRessourceId() {
+        return ressourceId;
+    }
+
+    public void setRessourceId(int ressourceId) {
+        this.ressourceId = ressourceId;
     }
 
     public String getTitle() {
