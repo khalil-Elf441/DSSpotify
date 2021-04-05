@@ -64,7 +64,7 @@
                     android:id="@+id/txtview_titre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Shape of You"
+                    android:text="Titsepoken 2015"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
                     android:id="@+id/txtview_artist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="by Ed Sheeran" />
+                    android:text="by Lensko" />
 
                 <SeekBar
                     android:id="@+id/seekBar_mediaplayer"
