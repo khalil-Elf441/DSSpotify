@@ -2,10 +2,13 @@ package com.example.dsspotify;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,16 +23,16 @@ import androidx.navigation.ui.NavigationUI;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(this);
+        getSupportActionBar().hide();
 
-            // Passing each menu ID as a set of Ids because each
+        // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_dashboard, R.id.navigation_home , R.id.navigation_notifications)
@@ -38,26 +41,40 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         NavigationUI.setupActionBarWithNavController(this, navController);
         NavigationUI.setupWithNavController(navView, navController);
 
+        //
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.lensko_titsepoken_2015);
+
+        //
+        ImageView imgbtn_main_play = findViewById(R.id.imgbtn_main_play);
+
+
+        imgbtn_main_play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.start();
+            }
+        });
+
+
+        ImageView imgbtn_main_stop = findViewById(R.id.imgbtn_main_stop);
+
+        imgbtn_main_stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mediaPlayer.isPlaying()){
+                    mediaPlayer.pause();
+                }
+            }
+        });
+
+
+
 
 
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.navigation_dashboard:
-                Log.wtf("caaase","navigation_dashboard");
-                break;
-            case R.id.navigation_home:
-                Log.wtf("caaase","navigation_dashboard");
-                break;
-            case R.id.navigation_notifications:
-                Log.wtf("caaase","navigation_dashboard");
-                break;
-        }
-        return false;
-    }
+
 
     public void startSpeechToText() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);

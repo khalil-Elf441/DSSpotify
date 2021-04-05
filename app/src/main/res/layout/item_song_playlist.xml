@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/imgView_item"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="80dp"
                 android:layout_weight="2"
                 app:srcCompat="@drawable/ic_baseline_music_note_24"
                 tools:ignore="VectorDrawableCompat" />
@@ -48,6 +48,15 @@
                     android:layout_height="wrap_content"
                     android:text="by Ed Sheeran" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgview_item_song_play_trigger"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:padding="15dp"
+                app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

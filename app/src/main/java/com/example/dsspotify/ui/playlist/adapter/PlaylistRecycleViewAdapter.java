@@ -40,6 +40,13 @@ public class PlaylistRecycleViewAdapter extends  RecyclerView.Adapter<PlaylistRe
         holder.titre.setText(song.getTitle());
         holder.artist.setText(song.getArtist());
 
+        holder.imgview_play_trigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+            }
+        });
+
     }
 
     @Override
@@ -51,12 +58,14 @@ public class PlaylistRecycleViewAdapter extends  RecyclerView.Adapter<PlaylistRe
         protected ImageView imageView;
         protected TextView titre;
         protected TextView artist;
+        protected ImageView imgview_play_trigger;
 
         public ItemViewHolder(View view) {
             super(view);
             this.imageView = (ImageView) view.findViewById(R.id.imgView_item);
             this.titre = (TextView) view.findViewById(R.id.txtview_titre);
             this.artist = (TextView) view.findViewById(R.id.txtview_artist);
+            this.imgview_play_trigger = (ImageView) view.findViewById(R.id.imgview_item_song_play_trigger);
         }
     }
 }

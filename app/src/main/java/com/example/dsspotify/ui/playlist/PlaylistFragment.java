@@ -40,7 +40,7 @@ public class PlaylistFragment extends Fragment {
 */
         //
         List<Song> SongList = new ArrayList<>();
-        SongList.add(new Song("hole1","khalil"));
+        SongList.add(new Song("Titsepoken 2015","Lensko"));
         SongList.add(new Song("hole2","khalil"));
         SongList.add(new Song("hole3","khalil"));
         SongList.add(new Song("hole4","khalil"));
@@ -59,8 +59,11 @@ public class PlaylistFragment extends Fragment {
         recycleview_song_playlist.setLayoutManager(new LinearLayoutManager(getContext()));
         PlaylistRecycleViewAdapter adapter = new PlaylistRecycleViewAdapter(SongList,getActivity());
 
+        //
         recycleview_song_playlist.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+
 
 
         return root;
