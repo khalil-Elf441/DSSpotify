@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,6 +23,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -41,13 +44,46 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController);
         NavigationUI.setupWithNavController(navView, navController);
 
+
+
+        //
+        SeekBar seekBar_mediaplayer = findViewById(R.id.seekBar_mediaplayer);
+
         //
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.lensko_titsepoken_2015);
 
+        seekBar_mediaplayer.setMax(mediaPlayer.getDuration());
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                seekBar_mediaplayer.setProgress(mediaPlayer.getCurrentPosition());
+
+            }
+        }, 0, 1000);
+
+        seekBar_mediaplayer.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mediaPlayer.seekTo(progress);
+               // seekBar_mediaplayer.setProgress(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+
         //
         ImageView imgbtn_main_play = findViewById(R.id.imgbtn_main_play);
-
-
         imgbtn_main_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +102,8 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
+
+
 
 
 
