@@ -1,16 +1,16 @@
-package com.example.dsspotify.ui.home;
+package com.example.dsspotify.ui.Speech;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class SpeechViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public SpeechViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is Speech fragment");
     }
 
     public LiveData<String> getText() {
