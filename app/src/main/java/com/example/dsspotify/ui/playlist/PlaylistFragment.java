@@ -19,21 +19,13 @@ import java.util.List;
 
 public class PlaylistFragment extends Fragment {
 
-    private PlaylistViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-      //  dashboardViewModel = new ViewModelProvider(this).get(PlaylistViewModel.class);
+
+
         View root = inflater.inflate(R.layout.fragment_playlist, container, false);
-       // final TextView textView =  root.findViewById(R.id.text_dashboard);
-/*
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-*/
+
         //
         List<Song> SongList = new ArrayList<>();
         SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
