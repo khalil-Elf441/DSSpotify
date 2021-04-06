@@ -18,7 +18,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.dsspotify.R;
+import com.example.dsspotify.ui.Speech.Model.Message;
+import com.example.dsspotify.ui.playlist.objects.Song;
+import com.stfalcon.chatkit.messages.MessagesList;
+import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class SpeechFragment extends Fragment {
@@ -35,9 +43,21 @@ public class SpeechFragment extends Fragment {
 
         ImageView imgView_microphone = root.findViewById(R.id.imgView_microphone);
 
+        MessagesList messagesList = root.findViewById(R.id.messagesList);
+      //  List<Message> MessageList = new ArrayList<>();
+        String senderId = "khalil";
+        MessagesListAdapter<Message> adapter = new MessagesListAdapter<>(senderId, null);
+        adapter.addToStart(new Message("1234","Play Lensko on Titsepoken 2015", new Date()),true);
+        adapter.addToStart(new Message("1234","Pause the music", new Date()),true);
+        adapter.addToStart(new Message("1234","Continue playing", new Date()),true);
+
+        messagesList.setAdapter(adapter);
+
+        //google speech
         imgView_microphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // source : https://developer.android.com/reference/android/speech/RecognizerIntent
                 Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,

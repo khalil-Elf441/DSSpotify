@@ -24,6 +24,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Timer;
@@ -64,7 +65,6 @@ public class MainActivity extends AppCompatActivity{
 
         //
         mediaPlayer = MediaPlayer.create(this, R.raw.lensko_titsepoken_2015);
-
         seekBar_mediaplayer.setMax(mediaPlayer.getDuration());
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
