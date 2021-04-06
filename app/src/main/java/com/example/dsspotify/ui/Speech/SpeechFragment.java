@@ -44,12 +44,14 @@ public class SpeechFragment extends Fragment {
         ImageView imgView_microphone = root.findViewById(R.id.imgView_microphone);
 
         MessagesList messagesList = root.findViewById(R.id.messagesList);
-      //  List<Message> MessageList = new ArrayList<>();
         String senderId = "khalil";
         MessagesListAdapter<Message> adapter = new MessagesListAdapter<>(senderId, null);
-        adapter.addToStart(new Message("1234","Play Lensko on Titsepoken 2015", new Date()),true);
-        adapter.addToStart(new Message("1234","Pause the music", new Date()),true);
-        adapter.addToStart(new Message("1234","Continue playing", new Date()),true);
+        adapter.addToStart(new Message("0","Play Lensko on Titsepoken 2015", new Date(),senderId),true);
+        adapter.addToStart(new Message("1","Playing Lensko on Titsepoken 2015", new Date(),"Server"),true);
+        adapter.addToStart(new Message("2","Pause the music", new Date(),senderId),true);
+        adapter.addToStart(new Message("3","Music paused", new Date(),"Server"),true);
+        adapter.addToStart(new Message("4","Continue playing", new Date(),senderId),true);
+        adapter.addToStart(new Message("5","Playing Lensko on Titsepoken 2015", new Date(),"Server"),true);
 
         messagesList.setAdapter(adapter);
 

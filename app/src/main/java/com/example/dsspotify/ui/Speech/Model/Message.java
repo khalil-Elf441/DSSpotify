@@ -13,10 +13,11 @@ public class Message implements IMessage {
     public Date createdAt;
     public Author author;
 
-    public Message(String id, String text, Date createdAt) {
+    public Message(String id, String text, Date createdAt,String userID) {
         this.id = id;
         this.text = text;
         this.createdAt = createdAt;
+        this.author = new Author(userID,"khalil","");
     }
 
     @Override
@@ -31,7 +32,7 @@ public class Message implements IMessage {
 
     @Override
     public Author getUser() {
-        return new Author("khalil","khalil","avatar");
+        return author;
     }
 
     @Override
