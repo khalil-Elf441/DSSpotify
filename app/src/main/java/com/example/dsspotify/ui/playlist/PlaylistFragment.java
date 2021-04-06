@@ -17,6 +17,14 @@ import com.example.dsspotify.ui.playlist.objects.Song;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+/*
+ *Ce fragment presente les différentes musiques proposé par le serveur de streaming
+ *
+ * @author khalil-Elf441
+ *
+ */
 public class PlaylistFragment extends Fragment {
 
 
@@ -28,6 +36,7 @@ public class PlaylistFragment extends Fragment {
 
         //
         List<Song> SongList = new ArrayList<>();
+        //example des musiques
         SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
         SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
         SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));

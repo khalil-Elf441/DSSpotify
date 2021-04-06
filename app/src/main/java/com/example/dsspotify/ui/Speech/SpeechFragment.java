@@ -35,14 +35,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+
+/*
+ *ce fragments représente l'echange de paroles entre le client et le serveur de reconnaissance de parole
+ *ainsi l'analyseur de requete
+ *
+ * @author khalil-Elf441
+ *
+ */
 public class SpeechFragment extends Fragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-
-
 
         View root = inflater.inflate(R.layout.fragment_speech, container, false);
 
@@ -51,6 +56,8 @@ public class SpeechFragment extends Fragment {
 
         MessagesList messagesList = root.findViewById(R.id.messagesList);
         String senderId = "khalil";
+
+        //examples d'echange des messages
         MessagesListAdapter<Message> adapter = new MessagesListAdapter<>(senderId, null);
         adapter.addToStart(new Message("0","Play Lensko on Titsepoken 2015", new Date(),senderId),true);
         adapter.addToStart(new Message("1","Playing Lensko on Titsepoken 2015", new Date(),"Server"),true);
@@ -74,22 +81,27 @@ public class SpeechFragment extends Fragment {
         }
 
         MediaRecorder mediaRecorder = new MediaRecorder();
-        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        mediaRecorder.setOutputFile(audiofile.getAbsolutePath());
 
+
+        File finalAudiofile = audiofile;
         imgView_microphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                // SpeechToText();
                 if(!recordFlag[0]){
+
+                    mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                    mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+                    mediaRecorder.setOutputFile(finalAudiofile.getAbsolutePath());
+
                     try {
                         mediaRecorder.prepare();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                     mediaRecorder.start();
 
                     txtview_record_idicator.setText("Audio recording ... ");
@@ -115,11 +127,6 @@ public class SpeechFragment extends Fragment {
 
             }
         });
-
-
-
-
-
 
         return root;
     }

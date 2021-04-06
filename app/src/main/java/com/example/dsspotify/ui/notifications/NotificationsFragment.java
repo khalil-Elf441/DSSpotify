@@ -14,8 +14,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.dsspotify.R;
 
-public class NotificationsFragment extends Fragment {
 
+/*
+ *Ce fragment est réservé pour les notifications entre les clients et les autres serveurs / logs ...
+ *
+ * @author khalil-Elf441
+ *
+ */
+public class NotificationsFragment extends Fragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
