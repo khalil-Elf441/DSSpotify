@@ -3,6 +3,7 @@ package com.example.dsspotify;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -28,15 +29,10 @@ import com.android.volley.toolbox.Volley;
 import com.example.dsspotify.MorceauManager.Mp3filesManagerPrx;
 import com.example.dsspotify.ui.Speech.Model.Message;
 import com.example.dsspotify.ui.Speech.SpeechFragment;
-import com.example.dsspotify.utils.Commande;
-import com.example.dsspotify.utils.TranscriptService;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -55,6 +51,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity{
 
+    //gestion des mediaplayes dans l'activite main
     public static MediaPlayer mediaPlayer = null;
     public static TextView txtview_titre = null;
     public static TextView txtview_artist = null;
@@ -69,6 +66,7 @@ public class MainActivity extends AppCompatActivity{
         BottomNavigationView navView = findViewById(R.id.nav_view);
         getSupportActionBar().hide();
 
+        //gestion de la manipulation entre les diffrentes pages de l'application
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_dashboard, R.id.navigation_home , R.id.navigation_notifications)
                 .build();
@@ -76,7 +74,7 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController);
         NavigationUI.setupWithNavController(navView, navController);
 
-
+        //definition du resource Xml de chaque page
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -89,8 +87,10 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.navigation_notifications:
                         navController.navigate(R.id.navigation_home);
                         break;
+                        //si l'utilisation click sur Speech la boite de dialoque Google Speech apparut
                     case R.id.navigation_home:
-                        Log.wtf("hello","hello");
+                        // test d'acces
+                       // Log.wtf("hello","hello");
                         SpeechToText();
                         break;
 
@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        //definition des resources dans le fichier XML
          txtview_titre = findViewById(R.id.txtview_titre);
          txtview_artist = findViewById(R.id.txtview_artist);
 
@@ -106,16 +107,20 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-        //
+        // la bar le lancement du morceau de musique
         SeekBar seekBar_mediaplayer = findViewById(R.id.seekBar_mediaplayer);
 
-        //Streaming local
+        //test local de media player
         //mediaPlayer = MediaPlayer.create(this, R.raw.maroon_5_memories);
 
+
+
         //source https://developer.android.com/guide/topics/media/mediaplayer
-        //Streaming from server
+        //streaming a partir du serveur en se basant sur la documantation du Google Speech
         String url = "http://10.188.38.53:5555"; // your URL here
         MediaPlayer mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
         mediaPlayer.setAudioAttributes(
                 new AudioAttributes.Builder()
                         .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -128,9 +133,9 @@ public class MainActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        //mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        seekBar_mediaplayer.setMax(mediaPlayer.getDuration());
 
+        //mise a jour le la bar a chaque minute de l'avanemcent de la musique
+        seekBar_mediaplayer.setMax(mediaPlayer.getDuration());
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -159,7 +164,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-        //
+        //boutton play
         ImageView imgbtn_main_play = findViewById(R.id.imgbtn_main_play);
         imgbtn_main_play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +173,7 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-
+        //button Stop
         ImageView imgbtn_main_stop = findViewById(R.id.imgbtn_main_stop);
         imgbtn_main_stop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +184,8 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+
+        //button arreter et recommancer
         ImageView imgbtn_main_reset = findViewById(R.id.imgbtn_main_reset);
         imgbtn_main_reset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,9 +217,13 @@ public class MainActivity extends AppCompatActivity{
                     String text = result.get(0);
                     Log.wtf("Speech",text);
 
-                    SpeechFragment mapFragment = (SpeechFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_home);
 
+                    //lancement du transcription a partir su serveur
                     calltranscriptserver(text);
+
+                    /*
+                    //test local du transcriptions
+                    SpeechFragment mapFragment = (SpeechFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_home);
                     Commande commande = TranscriptService.analyser(text);
 
                     //if(!commande.getDictionnaireWord().equals("nan") || !commande.getTargetMusic().equals("nan")){
@@ -222,13 +233,8 @@ public class MainActivity extends AppCompatActivity{
                       //  (mapFragment).adapter.addToStart(new Message("5","Oups, je vous ai pas bien entendu pouvez répéter s'il vous plaît ?", new Date(),"Server"),true);
 
                     //}
+                     */
 
-
-
-
-
-
-                   // message add .setText(text);
                 }
                 break;
             }
@@ -258,6 +264,8 @@ public class MainActivity extends AppCompatActivity{
         map.put("targetMusic",commande.getTargetMusic());
     * */
 
+
+    //fonction d'appel au service de transcription
     public void calltranscriptserver(String userinfo){
 
        // String url = "https://127.0.0.1:8080/api/users/transcript";
@@ -297,6 +305,7 @@ public class MainActivity extends AppCompatActivity{
                                     break;
                             }
 
+                            //ajouter les message de discussion entre le serveur et le client
                             SpeechFragment mapFragment = (SpeechFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_home);
                             (mapFragment).adapter.addToStart(new Message("targetapi5",DictionnaireWord +" "+target, new Date(),"khalil"),true);
                             (mapFragment).adapter.addToStart(new Message("responseapi5"+target,"ok", new Date(),"Server"),true);
@@ -321,50 +330,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    class Streamingplayer extends AsyncTask<String, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(String... strings) {
-            Boolean prepared = false;
-
-            try {
-                mediaPlayer.setDataSource(strings[0]);
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-
-                        mediaPlayer.stop();
-                        mediaPlayer.reset();
-                    }
-                });
-
-                mediaPlayer.prepare();
-                prepared = true;
-
-            } catch (Exception e) {
-                Log.e("MyAudioStreamingApp", e.getMessage());
-                prepared = false;
-            }
-
-            return prepared;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean aBoolean) {
-            super.onPostExecute(aBoolean);
-
-            Log.wtf("player","post execution...");
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            Log.wtf("player","Buffering...");
-
-        }
-    }
-
-
+    //gestion de la commucation entre l'application et Zeroc Ice
     public static class IceCommunication extends AsyncTask<String, Void, String> {
 
         String clip;
@@ -387,7 +353,6 @@ public class MainActivity extends AppCompatActivity{
                 communicator.getProperties().setProperty("Ice.Default.Package", "MorceauManager");
                 Mp3filesManagerPrx mp3manager = Mp3filesManagerPrx.checkedCast(communicator.stringToProxy("Mp3filesManager:default -h "+ipAdress+" -p 10000"));
 
-                //mp3manager.startStream( clip);
 
                 switch (action){
                     case "jouer":

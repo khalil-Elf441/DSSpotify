@@ -38,12 +38,10 @@ public class PlaylistFragment extends Fragment {
         //
         List<Song> SongList = new ArrayList<>();
         //example des musiques
-        SongList.add(new Song("SkyRock","Radio",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("SkyRock","Radio",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("SkyRock","Radio",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("memo","Maroon-5",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("OneRepublic","OneRepublic",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("music","Souf",R.raw.lensko_titsepoken_2015));
+       //SongList.add(new Song("SkyRock","Radio",R.raw.lensko_titsepoken_2015));
+        //SongList.add(new Song("memo","Maroon-5",R.raw.lensko_titsepoken_2015));
+        //SongList.add(new Song("OneRepublic","OneRepublic",R.raw.lensko_titsepoken_2015));
+        //SongList.add(new Song("music","Souf",R.raw.lensko_titsepoken_2015));
 
         //
 
