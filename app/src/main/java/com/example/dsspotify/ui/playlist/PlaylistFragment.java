@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dsspotify.MainActivity;
 import com.example.dsspotify.R;
 import com.example.dsspotify.ui.playlist.adapter.PlaylistRecycleViewAdapter;
 import com.example.dsspotify.ui.playlist.objects.Song;
@@ -37,16 +38,15 @@ public class PlaylistFragment extends Fragment {
         //
         List<Song> SongList = new ArrayList<>();
         //example des musiques
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
-        SongList.add(new Song("Titsepoken 2015","Lensko",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("SkyRock","Radio",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("SkyRock","Radio",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("SkyRock","Radio",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("memo","Maroon-5",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("OneRepublic","OneRepublic",R.raw.lensko_titsepoken_2015));
+        SongList.add(new Song("music","Souf",R.raw.lensko_titsepoken_2015));
+
+        //
+
 
 
         //
@@ -58,8 +58,8 @@ public class PlaylistFragment extends Fragment {
         recycleview_song_playlist.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-
-
         return root;
     }
+
+
 }

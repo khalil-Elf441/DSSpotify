@@ -1,14 +1,24 @@
 package com.example.dsspotify.ui.Speech;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
+import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,6 +27,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -35,6 +46,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.dsspotify.MainActivity.mediaPlayer;
+
 
 /*
  *ce fragments représente l'echange de paroles entre le client et le serveur de reconnaissance de parole
@@ -45,26 +58,95 @@ import java.util.Locale;
  */
 public class SpeechFragment extends Fragment {
 
+    SpeechRecognizer speechRecognizer;
+    public static MessagesListAdapter<Message> adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_speech, container, false);
 
-        ImageView imgView_microphone = root.findViewById(R.id.imgView_microphone);
-        TextView txtview_record_idicator = root.findViewById(R.id.txtview_record_idicator);
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(getContext());
+        final Intent mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,
+                Locale.getDefault());
+
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle bundle) {
+
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+
+            }
+
+            @Override
+            public void onRmsChanged(float v) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] bytes) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+
+            }
+
+            @Override
+            public void onError(int i) {
+
+            }
+
+            @Override
+            public void onResults(Bundle bundle) {
+                //getting all the matches
+                ArrayList<String> matches = bundle
+                        .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+
+                Log.wtf("log",matches.get(0));
+
+                //displaying the first match
+                if (matches != null)
+                    Log.wtf("log",matches.get(0));
+            }
+
+            @Override
+            public void onPartialResults(Bundle bundle) {
+
+            }
+
+            @Override
+            public void onEvent(int i, Bundle bundle) {
+
+            }
+        });
+
+      // ImageView imgView_microphone = root.findViewById(R.id.imgView_microphone);
+
+
+
+
+
+       // TextView txtview_record_idicator = root.findViewById(R.id.txtview_record_idicator);
 
         MessagesList messagesList = root.findViewById(R.id.messagesList);
         String senderId = "khalil";
 
         //examples d'echange des messages
-        MessagesListAdapter<Message> adapter = new MessagesListAdapter<>(senderId, null);
-        adapter.addToStart(new Message("0","Play Lensko on Titsepoken 2015", new Date(),senderId),true);
-        adapter.addToStart(new Message("1","Playing Lensko on Titsepoken 2015", new Date(),"Server"),true);
-        adapter.addToStart(new Message("2","Pause the music", new Date(),senderId),true);
-        adapter.addToStart(new Message("3","Music paused", new Date(),"Server"),true);
-        adapter.addToStart(new Message("4","Continue playing", new Date(),senderId),true);
-        adapter.addToStart(new Message("5","Playing Lensko on Titsepoken 2015", new Date(),"Server"),true);
+        adapter = new MessagesListAdapter<>(senderId, null);
+        adapter.addToStart(new Message("0","jouer piano", new Date(),senderId),true);
+        adapter.addToStart(new Message("1","ok", new Date(),"Server"),true);
+        adapter.addToStart(new Message("2","stopper piano", new Date(),senderId),true);
+        adapter.addToStart(new Message("3","ok", new Date(),"Server"),true);
+        adapter.addToStart(new Message("2","continuer piano", new Date(),senderId),true);
+        adapter.addToStart(new Message("3","ok", new Date(),"Server"),true);
 
         messagesList.setAdapter(adapter);
 
@@ -84,11 +166,15 @@ public class SpeechFragment extends Fragment {
 
 
         File finalAudiofile = audiofile;
+        /*
         imgView_microphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               // SpeechToText();
+               SpeechToText();
+
+                /*
+
                 if(!recordFlag[0]){
 
                     mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -124,14 +210,18 @@ public class SpeechFragment extends Fragment {
                     adapter.addToStart(new Message("6","Play Titsepoken 2015", new Date(),"khalil"),true);
                     recordFlag[0] = false;
                 }
+                */
+
+         /*
+
 
             }
         });
+        */
+
 
         return root;
     }
-
-
 
 
 
@@ -153,4 +243,9 @@ public class SpeechFragment extends Fragment {
                     Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }
+
+
+
